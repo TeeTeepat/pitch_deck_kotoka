@@ -1,0 +1,909 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Kotoka — Genesis AI 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+Thai:wght@500;700&display=swap" rel="stylesheet">
+<style>
+/* =====================================================================
+   KOTOKA × GENESIS 2026 — BOLD SIGNAL (single self-contained file)
+   Style: Archivo Black + Space Grotesk · dark gradient · vibrant card focal
+   ===================================================================== */
+:root {
+  /* Theme — Bold Signal */
+  --bg-primary: #0c0c0e;
+  --bg-secondary: #1a1a1c;
+  --bg-gradient: linear-gradient(135deg, #0c0c0e 0%, #1f1f24 50%, #0c0c0e 100%);
+  --text-primary: #ffffff;
+  --text-secondary: #9a9aa3;
+  --text-tertiary: #5a5a63;
+
+  /* Accent palette — rotated per slide */
+  --accent-coral: #FF5722;
+  --accent-teal:  #00E5C7;
+  --accent-gold:  #FFC857;
+  --accent-cyan:  #4DC4FF;
+  --accent-rose:  #FF4D79;
+  --accent-lime:  #C5F542;
+
+  /* Type */
+  --font-display: "Archivo Black", "Inter", system-ui, sans-serif;
+  --font-body:    "Space Grotesk", system-ui, sans-serif;
+  --font-mono:    "JetBrains Mono", ui-monospace, monospace;
+  --font-thai:    "Noto Sans Thai", system-ui, sans-serif;
+
+  /* Sizes (clamp() per skill rules) */
+  --title-size:    clamp(2.5rem, 6.5vw, 5.5rem);
+  --hero-size:     clamp(4rem, 14vw, 13rem);
+  --h2-size:       clamp(1.4rem, 3.6vw, 2.5rem);
+  --body-size:     clamp(0.85rem, 1.3vw, 1.05rem);
+  --small-size:    clamp(0.7rem, 1vw, 0.85rem);
+  --num-size:      clamp(2.5rem, 7vw, 5.5rem);
+
+  --slide-padding: clamp(1.5rem, 4vw, 4rem);
+  --content-gap:   clamp(0.75rem, 2vw, 2rem);
+  --element-gap:   clamp(0.4rem, 1vw, 1rem);
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration:      0.7s;
+}
+
+/* === VIEWPORT-BASE.CSS (mandatory rules from skill) ================ */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { height: 100%; overflow-x: hidden; background: var(--bg-primary); color: var(--text-primary); font-family: var(--font-body); }
+html { scroll-snap-type: y mandatory; scroll-behavior: smooth; }
+body { font-size: var(--body-size); line-height: 1.5; -webkit-font-smoothing: antialiased; }
+
+.slide {
+  width: 100vw; height: 100vh; height: 100dvh;
+  overflow: hidden; scroll-snap-align: start;
+  display: flex; flex-direction: column; position: relative;
+  background: var(--bg-gradient);
+  padding: var(--slide-padding);
+}
+
+.slide-content {
+  flex: 1; display: flex; flex-direction: column; justify-content: center;
+  max-height: 100%; overflow: hidden;
+}
+
+/* Short viewports */
+@media (max-height: 700px) {
+  :root { --slide-padding: clamp(0.75rem, 3vw, 2rem); --content-gap: clamp(0.4rem, 1.5vw, 1rem); --title-size: clamp(1.8rem, 5vw, 3rem); --hero-size: clamp(3rem, 11vw, 9rem); --num-size: clamp(2rem, 6vw, 4rem); }
+}
+@media (max-height: 600px) {
+  :root { --slide-padding: clamp(0.5rem, 2.5vw, 1.5rem); --title-size: clamp(1.4rem, 4.5vw, 2.4rem); --body-size: clamp(0.7rem, 1.2vw, 0.95rem); }
+  .nav-dots, .keyboard-hint { display: none; }
+}
+@media (max-width: 720px) {
+  :root { --title-size: clamp(1.4rem, 7vw, 2.5rem); }
+  .grid-2, .grid-3 { grid-template-columns: 1fr !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.2s !important; }
+  html { scroll-behavior: auto; }
+}
+
+/* === BOLD SIGNAL CHROME ============================================ */
+.s-num {
+  position: absolute; top: var(--slide-padding); left: var(--slide-padding);
+  font-family: var(--font-display); font-size: var(--num-size);
+  color: var(--text-primary); line-height: 1; letter-spacing: -0.04em;
+  z-index: 5;
+}
+.s-num em {
+  font-style: normal; color: var(--accent); display: inline-block;
+}
+.s-nav {
+  position: absolute; top: calc(var(--slide-padding) + 0.5rem); right: var(--slide-padding);
+  display: flex; gap: 1.25rem; font-family: var(--font-mono); font-size: var(--small-size);
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-tertiary);
+  z-index: 5;
+}
+.s-nav b { color: var(--accent); font-weight: 700; }
+
+.s-foot {
+  position: absolute; bottom: calc(var(--slide-padding) - 0.5rem); left: var(--slide-padding); right: var(--slide-padding);
+  display: flex; justify-content: space-between; align-items: center;
+  font-family: var(--font-mono); font-size: var(--small-size);
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-tertiary);
+  z-index: 5;
+}
+.s-foot b { color: var(--text-primary); font-weight: 700; }
+
+/* Reveal animations */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity var(--duration) var(--ease-out-expo), transform var(--duration) var(--ease-out-expo); }
+.slide.visible .reveal { opacity: 1; transform: translateY(0); }
+.slide.visible .reveal:nth-child(1) { transition-delay: 0.05s; }
+.slide.visible .reveal:nth-child(2) { transition-delay: 0.15s; }
+.slide.visible .reveal:nth-child(3) { transition-delay: 0.25s; }
+.slide.visible .reveal:nth-child(4) { transition-delay: 0.35s; }
+.slide.visible .reveal:nth-child(5) { transition-delay: 0.45s; }
+
+.reveal-scale { opacity: 0; transform: scale(0.96); transition: opacity var(--duration), transform var(--duration) var(--ease-out-expo); }
+.slide.visible .reveal-scale { opacity: 1; transform: scale(1); }
+
+/* Bold-signal "card" (vibrant focal block) */
+.signal-card {
+  background: var(--accent); color: #0a0a0e;
+  padding: clamp(1rem, 2.5vw, 2rem) clamp(1.25rem, 3vw, 2.5rem);
+  border-radius: clamp(8px, 0.8vw, 14px);
+  box-shadow: 0 18px 60px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.04);
+}
+
+/* Display headlines */
+h1.display {
+  font-family: var(--font-display); font-size: var(--title-size); line-height: 1.0;
+  letter-spacing: -0.03em; color: var(--text-primary);
+}
+h1.display em { font-style: normal; color: var(--accent); }
+
+h2.eyebrow {
+  font-family: var(--font-mono); font-size: var(--small-size); letter-spacing: 0.32em;
+  text-transform: uppercase; color: var(--accent); margin-bottom: clamp(0.4rem, 1vw, 0.9rem);
+}
+
+/* Pills + chips */
+.pill { display:inline-flex; align-items:center; gap:6px; padding:5px 12px; border-radius:999px; font-size: var(--small-size); font-weight: 600; background: rgba(255,255,255,0.06); color: var(--text-secondary); border: 1px solid rgba(255,255,255,0.08); }
+.pill.accent { background: var(--accent); color: #0a0a0e; border-color: transparent; }
+
+/* Generic grids */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--content-gap); }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: var(--content-gap); }
+.grid-46 { display: grid; grid-template-columns: 4fr 6fr; gap: var(--content-gap); }
+.grid-64 { display: grid; grid-template-columns: 6fr 4fr; gap: var(--content-gap); }
+.grid-55 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--content-gap); }
+
+/* Cards */
+.card-dark { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); border-radius: clamp(8px, 0.8vw, 14px); padding: clamp(0.75rem, 1.6vw, 1.4rem); }
+.card-dark.accented { border-left: 3px solid var(--accent); }
+.card-dark .v { font-family: var(--font-display); font-size: clamp(1.4rem, 3vw, 2.4rem); color: var(--accent); line-height: 1; }
+.card-dark .l { font-size: clamp(0.75rem, 1.1vw, 0.95rem); color: var(--text-secondary); margin-top: 0.5rem; line-height: 1.45; }
+
+/* === SLIDE-SPECIFIC OVERRIDES ====================================== */
+
+/* 01 COVER */
+.slide-1 { --accent: var(--accent-coral); }
+.slide-1 .cover-grid { display: grid; grid-template-columns: 7fr 3fr; gap: var(--content-gap); flex:1; align-items: center; }
+.slide-1 .wordmark { font-family: var(--font-display); font-size: var(--hero-size); letter-spacing: -0.05em; line-height: 0.85; color: var(--text-primary); }
+.slide-1 .wordmark em { font-style: normal; color: var(--accent); }
+.slide-1 .tag-prop { font-family: var(--font-mono); font-size: clamp(0.85rem, 1.3vw, 1.1rem); letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-top: clamp(0.5rem, 1.5vw, 1.25rem); }
+.slide-1 .tag-line { font-size: clamp(0.95rem, 1.6vw, 1.4rem); color: var(--text-secondary); margin-top: clamp(0.5rem, 1.2vw, 1rem); max-width: 42em; line-height: 1.4; }
+.slide-1 .pilots-card { background: var(--accent); color: #0a0a0e; padding: clamp(1rem, 2vw, 1.6rem); border-radius: 14px; }
+.slide-1 .pilots-card b { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); display: block; line-height: 1; }
+.slide-1 .pilots-card span { font-size: clamp(0.7rem, 1vw, 0.85rem); letter-spacing: 0.12em; text-transform: uppercase; }
+.slide-1 .trust-strip { position: absolute; bottom: var(--slide-padding); left: var(--slide-padding); right: var(--slide-padding); display: flex; justify-content: space-between; gap: 1rem; font-family: var(--font-mono); font-size: var(--small-size); letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-tertiary); border-top: 1px solid rgba(255,255,255,0.06); padding-top: clamp(0.6rem, 1vw, 1rem); }
+.slide-1 .trust-strip b { color: var(--text-primary); }
+
+/* 02 PROBLEM */
+.slide-2 { --accent: var(--accent-rose); }
+.slide-2 .ebbing { background: rgba(255,255,255,0.03); border-radius: 14px; padding: clamp(0.75rem, 1.5vw, 1.25rem); display: flex; flex-direction: column; gap: 0.5rem; }
+.slide-2 .ebbing svg { width: 100%; height: auto; max-height: 38vh; }
+.slide-2 .root-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.75rem; margin-top: 0.5rem; }
+.slide-2 .rc { background: rgba(255,255,255,0.04); border-radius: 10px; padding: 0.75rem 1rem; display: flex; gap: 0.7rem; align-items:center; border-left: 3px solid var(--accent); }
+.slide-2 .rc .n { font-family: var(--font-display); color: var(--accent); font-size: clamp(1rem, 1.6vw, 1.4rem); }
+.slide-2 .rc .t { font-size: clamp(0.7rem, 1vw, 0.85rem); }
+
+/* 03 INSIGHT */
+.slide-3 { --accent: var(--accent-cyan); }
+.slide-3 .insight-h { font-family: var(--font-display); font-size: clamp(2.6rem, 6.5vw, 5.5rem); line-height: 0.95; letter-spacing: -0.04em; max-width: 18ch; }
+.slide-3 .insight-h em { color: var(--accent); font-style: normal; }
+.slide-3 .insight-body { color: var(--text-secondary); font-size: clamp(0.9rem, 1.4vw, 1.15rem); max-width: 48em; line-height: 1.55; margin-top: clamp(0.75rem, 1.6vw, 1.25rem); }
+.slide-3 .insight-pull { margin-top: clamp(0.75rem, 1.6vw, 1.25rem); border-left: 4px solid var(--accent); padding-left: 1rem; color: var(--accent); font-style: italic; font-size: clamp(0.95rem, 1.5vw, 1.25rem); font-weight: 600; }
+.slide-3 .channels { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.6rem; }
+.slide-3 .ch { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: clamp(0.6rem, 1.2vw, 1rem); display: flex; flex-direction: column; align-items:center; gap:0.4rem; }
+.slide-3 .ch svg { width: clamp(28px, 3vw, 40px); height: clamp(28px, 3vw, 40px); stroke: var(--accent); fill: none; stroke-width: 2; }
+.slide-3 .ch span { font-family: var(--font-mono); font-size: clamp(0.6rem, 0.9vw, 0.75rem); letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-secondary); }
+
+/* 04 SOLUTION */
+.slide-4 { --accent: var(--accent-teal); }
+.slide-4 .arch-flow { display: flex; flex-wrap: wrap; gap: clamp(0.4rem, 1vw, 0.8rem); align-items: center; justify-content:center; margin-top: var(--content-gap); }
+.slide-4 .node { padding: clamp(0.55rem, 1.2vw, 0.95rem) clamp(0.7rem, 1.4vw, 1.1rem); border-radius: 10px; font-weight:600; font-size: clamp(0.7rem, 1.1vw, 0.92rem); text-align:center; min-width: clamp(120px, 13vw, 200px); border: 1px solid rgba(255,255,255,0.08); }
+.slide-4 .node sub { display:block; font-size: clamp(0.6rem, 0.9vw, 0.75rem); margin-top: 0.3rem; opacity: 0.75; font-weight: 400; }
+.slide-4 .n1 { background: rgba(255,255,255,0.06); color: var(--text-primary); }
+.slide-4 .n2 { background: rgba(0,229,199,0.18); color: var(--accent); border-color: rgba(0,229,199,0.35); }
+.slide-4 .n3 { background: rgba(255,200,87,0.14); color: var(--accent-gold); border-color: rgba(255,200,87,0.3); }
+.slide-4 .n4 { background: var(--accent); color: #0a0a0e; border-color: transparent; }
+.slide-4 .n5 { background: var(--accent-coral); color: #0a0a0e; border-color: transparent; }
+.slide-4 .arr { color: var(--accent); font-size: clamp(1rem, 1.6vw, 1.4rem); }
+.slide-4 .channels-row { display:flex; gap:0.3rem; flex-wrap:wrap; justify-content:center; margin-top: 0.4rem; }
+.slide-4 .channels-row span { font-size: clamp(0.55rem, 0.85vw, 0.7rem); padding: 2px 8px; background: rgba(0,0,0,0.2); border-radius: 999px; }
+.slide-4 .eq-bench { display: grid; grid-template-columns: 1fr 1fr; gap: var(--content-gap); margin-top: var(--content-gap); }
+.slide-4 .bench { background: rgba(0,229,199,0.08); border-left: 4px solid var(--accent); padding: clamp(0.7rem, 1.4vw, 1.1rem); border-radius: 10px; }
+.slide-4 .bench b { font-family: var(--font-display); font-size: clamp(1.6rem, 3.2vw, 2.6rem); color: var(--accent); display: block; line-height: 1; }
+.slide-4 .bench p { color: var(--text-secondary); font-size: clamp(0.75rem, 1.05vw, 0.9rem); margin-top: 0.4rem; line-height: 1.4; }
+.slide-4 .eqbox { background: #050507; border: 1px solid rgba(0,229,199,0.2); border-radius: 10px; padding: clamp(0.8rem, 1.5vw, 1.2rem); font-family: var(--font-mono); color: var(--accent); font-size: clamp(0.85rem, 1.25vw, 1.1rem); display: flex; align-items: center; justify-content: center; }
+
+/* 05 PRODUCT */
+.slide-5 { --accent: var(--accent-gold); }
+.slide-5 .phones { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(0.5rem, 1.2vw, 1rem); margin-top: var(--content-gap); flex: 1; align-items:start; }
+.slide-5 .pcell { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+.slide-5 .pframe { width: 100%; max-width: 200px; aspect-ratio: 360/740; background: linear-gradient(180deg, #1a1a1c, #0a0a0e); border-radius: 22px; padding: 8px; box-shadow: 0 14px 40px rgba(0,0,0,0.45); }
+.slide-5 .pscreen { width:100%; height:100%; border-radius: 16px; padding: 0.75rem; display:flex; flex-direction: column; gap: 0.4rem; font-size: clamp(0.55rem, 0.8vw, 0.7rem); overflow: hidden; }
+.slide-5 .ps-snap { background: linear-gradient(180deg, #5a4a3c, #2a2a3a); justify-content: flex-end; }
+.slide-5 .ps-snap div { background: rgba(0,0,0,0.55); color: white; padding: 4px 6px; border-radius: 4px; text-align: center; font-size: clamp(0.5rem, 0.7vw, 0.65rem); }
+.slide-5 .ps-audio { background: #050507; align-items:center; justify-content:center; color: white; }
+.slide-5 .waveform { display:flex; align-items:center; gap:2px; height: clamp(40px, 6vh, 60px); }
+.slide-5 .waveform i { width: 3px; background: var(--accent); border-radius: 2px; }
+.slide-5 .timer { font-family: var(--font-mono); font-size: clamp(0.85rem, 1.4vw, 1.2rem); color: var(--accent); font-weight: 700; margin-top: 0.4rem; }
+.slide-5 .ps-tag { background: white; color: #1a1a1c; }
+.slide-5 .ps-tag .label { color: #666; }
+.slide-5 .chip { display: inline-block; padding: 2px 6px; background: #ffeec5; color: #6b5210; border-radius: 999px; font-size: clamp(0.45rem, 0.7vw, 0.6rem); margin: 1px; }
+.slide-5 .save-cta { background: var(--accent); color: #1a1a1c; text-align:center; padding: 5px; border-radius: 6px; font-weight: 700; font-size: clamp(0.5rem, 0.75vw, 0.65rem); margin-top: 0.4rem; }
+.slide-5 .ps-word { background: white; color: #1a1a1c; }
+.slide-5 .word-h { font-family: var(--font-display); color: var(--accent); font-size: clamp(0.9rem, 1.4vw, 1.2rem); letter-spacing: -0.02em; }
+.slide-5 .word-pron { font-family: var(--font-mono); color: #666; font-size: clamp(0.5rem, 0.7vw, 0.6rem); }
+.slide-5 .word-th { font-family: var(--font-thai); color: #1a1a1c; font-size: clamp(0.65rem, 0.95vw, 0.85rem); }
+.slide-5 .cluster { font-size: clamp(0.45rem, 0.65vw, 0.55rem); margin-top: 0.3rem; }
+.slide-5 .cluster div { display:flex; justify-content:space-between; padding: 2px 0; border-bottom: 1px dashed #ddd; color: #444; }
+.slide-5 .ptile { text-align:center; }
+.slide-5 .ptile b { font-family: var(--font-display); font-size: clamp(0.7rem, 1.05vw, 0.92rem); letter-spacing: 0.04em; color: var(--text-primary); }
+.slide-5 .ptile span { display:block; color: var(--text-tertiary); font-size: clamp(0.55rem, 0.8vw, 0.7rem); margin-top: 2px; }
+.slide-5 .latency-strip { background: var(--accent); color: #0a0a0e; border-radius: 10px; padding: clamp(0.6rem, 1.2vw, 1rem) clamp(0.75rem, 1.6vw, 1.5rem); display: flex; justify-content: space-around; gap: 0.5rem; font-family: var(--font-mono); font-weight: 700; font-size: clamp(0.7rem, 1.05vw, 0.95rem); margin-top: var(--element-gap); flex-wrap: wrap; }
+
+/* 06 MEMORY MAP */
+.slide-6 { --accent: var(--accent-teal); }
+.slide-6 .mm-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--content-gap); flex:1; align-items: center; }
+.slide-6 .mm-phone { width: 100%; max-width: 360px; aspect-ratio: 9/19; background: #050507; border-radius: 28px; padding: 10px; box-shadow: 0 0 40px rgba(0,229,199,0.15); border: 1px solid rgba(0,229,199,0.2); margin: 0 auto; }
+.slide-6 .mm-screen { width:100%; height:100%; border-radius: 20px; background: linear-gradient(135deg, #0a0a14, #1a1a2e); padding: clamp(0.75rem, 1.5vw, 1.25rem); display:flex; flex-direction:column; gap: 0.5rem; font-size: clamp(0.55rem, 0.85vw, 0.75rem); overflow: hidden; }
+.slide-6 .mm-districts { display: grid; grid-template-columns: 1fr 1fr; font-family: var(--font-mono); font-size: clamp(0.5rem, 0.7vw, 0.65rem); color: rgba(255,255,255,0.4); letter-spacing: 0.16em; }
+.slide-6 .mm-districts span:nth-child(2), .slide-6 .mm-districts span:nth-child(4) { text-align: right; }
+.slide-6 .mm-canvas { flex: 1; position: relative; border: 1px dashed rgba(0,229,199,0.18); border-radius: 8px; min-height: 80px; }
+.slide-6 .dot { position: absolute; width: 12px; height: 12px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 10px var(--accent); animation: pulse 2.4s ease-in-out infinite; }
+.slide-6 .dot:nth-child(2) { animation-delay: 0.4s; }
+.slide-6 .dot:nth-child(3) { animation-delay: 0.8s; }
+.slide-6 .dot:nth-child(4) { animation-delay: 1.2s; }
+.slide-6 .dot:nth-child(5) { animation-delay: 1.6s; }
+@keyframes pulse { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(1.5);opacity:0.6} }
+.slide-6 .vp { background: rgba(0,229,199,0.08); border-radius: 6px; padding: 4px 6px; font-size: clamp(0.5rem, 0.75vw, 0.66rem); }
+.slide-6 .vp b { color: var(--accent); font-family: var(--font-thai); }
+.slide-6 .mm-stats { display:flex; justify-content:space-between; padding-top: 0.4rem; border-top: 1px solid rgba(255,255,255,0.08); font-size: clamp(0.5rem, 0.75vw, 0.65rem); }
+.slide-6 .mm-stats b { color: var(--accent); font-family: var(--font-display); }
+.slide-6 .story { display: flex; flex-direction: column; gap: clamp(0.5rem, 1.2vw, 1rem); }
+.slide-6 .step { background: rgba(255,255,255,0.04); border-radius: 12px; padding: clamp(0.7rem, 1.4vw, 1.1rem) clamp(0.85rem, 1.6vw, 1.3rem); display: flex; gap: clamp(0.5rem, 1vw, 0.9rem); }
+.slide-6 .step .n { width: clamp(28px, 3vw, 40px); height: clamp(28px, 3vw, 40px); flex-shrink: 0; background: var(--accent); color: #0a0a0e; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: clamp(0.95rem, 1.5vw, 1.3rem); }
+.slide-6 .step h4 { font-family: var(--font-body); font-weight: 700; font-size: clamp(0.85rem, 1.2vw, 1rem); margin-bottom: 0.2rem; }
+.slide-6 .step p { font-size: clamp(0.7rem, 1vw, 0.88rem); color: var(--text-secondary); line-height: 1.45; }
+.slide-6 .step code { background: rgba(0,229,199,0.12); color: var(--accent); padding: 1px 6px; border-radius: 3px; font-family: var(--font-mono); font-size: 0.85em; }
+.slide-6 .hero-stat { background: var(--accent); color: #0a0a0e; border-radius: 12px; padding: clamp(0.85rem, 1.6vw, 1.2rem); text-align: center; }
+.slide-6 .hero-stat b { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); display: block; line-height: 1; }
+.slide-6 .hero-stat span { font-size: clamp(0.65rem, 0.95vw, 0.82rem); display:block; margin-top: 0.4rem; line-height: 1.4; }
+
+/* 07 COMPETITIVE */
+.slide-7 { --accent: var(--accent-lime); }
+.slide-7 table { width: 100%; border-collapse: collapse; background: rgba(255,255,255,0.03); border-radius: 12px; overflow: hidden; font-size: clamp(0.7rem, 1.05vw, 0.9rem); margin-top: var(--element-gap); }
+.slide-7 thead th { background: #0a0a0e; color: var(--text-secondary); padding: clamp(0.5rem, 1vw, 0.85rem); text-align: left; font-family: var(--font-mono); font-size: clamp(0.6rem, 0.9vw, 0.75rem); letter-spacing: 0.16em; text-transform: uppercase; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.slide-7 thead th.kotoka { background: var(--accent); color: #0a0a0e; }
+.slide-7 tbody td { padding: clamp(0.45rem, 0.9vw, 0.75rem); border-bottom: 1px solid rgba(255,255,255,0.05); vertical-align: middle; }
+.slide-7 tbody td.dim { font-weight: 600; color: var(--text-primary); width: 18em; }
+.slide-7 tbody td.kotoka { background: rgba(197,245,66,0.06); border-left: 3px solid var(--accent); font-weight: 600; color: var(--accent); }
+.slide-7 .check { color: var(--accent); font-weight: 700; }
+.slide-7 .x { color: var(--text-tertiary); }
+.slide-7 .footnote { font-size: clamp(0.6rem, 0.85vw, 0.7rem); color: var(--text-tertiary); margin-top: 0.3rem; }
+.slide-7 .moat { margin-top: var(--element-gap); background: rgba(197,245,66,0.06); border-radius: 10px; padding: clamp(0.7rem, 1.4vw, 1.1rem); font-size: clamp(0.75rem, 1.1vw, 0.95rem); line-height: 1.45; }
+.slide-7 .moat strong { color: var(--accent); font-family: var(--font-mono); letter-spacing: 0.16em; text-transform: uppercase; font-size: 0.85em; display: block; margin-bottom: 0.3rem; }
+
+/* 08 ARCHITECTURE */
+.slide-8 { --accent: var(--accent-cyan); }
+.slide-8 .arch-grid { display: grid; grid-template-columns: 7fr 3fr; gap: var(--content-gap); flex: 1; align-items:start; margin-top: var(--element-gap); }
+.slide-8 .layers { display:flex; flex-direction:column; gap: 0.5rem; }
+.slide-8 .layer { padding: clamp(0.65rem, 1.3vw, 1.1rem); border-radius: 10px; }
+.slide-8 .l1 { background: rgba(255,255,255,0.06); }
+.slide-8 .l2 { background: rgba(77,196,255,0.12); }
+.slide-8 .l3 { background: rgba(0,229,199,0.12); }
+.slide-8 .layer h4 { font-family: var(--font-mono); font-size: clamp(0.6rem, 0.9vw, 0.75rem); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 0.5rem; opacity: 0.7; }
+.slide-8 .pills { display:flex; flex-wrap:wrap; gap: 0.4rem; }
+.slide-8 .pills span { padding: 4px 10px; background: rgba(255,255,255,0.06); border-radius: 6px; font-family: var(--font-mono); font-size: clamp(0.6rem, 0.9vw, 0.75rem); color: var(--text-primary); }
+.slide-8 .arr-down { text-align: center; color: var(--accent); font-family: var(--font-mono); font-size: clamp(0.65rem, 0.95vw, 0.8rem); margin: 0.2rem 0; }
+.slide-8 .ip-side { background: rgba(0,0,0,0.4); border: 1px solid rgba(77,196,255,0.18); border-radius: 12px; padding: clamp(0.75rem, 1.5vw, 1.25rem); display: flex; flex-direction: column; gap: 0.5rem; }
+.slide-8 .ip-side h4 { font-family: var(--font-mono); font-size: clamp(0.6rem, 0.9vw, 0.75rem); letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; }
+.slide-8 .ip-side ul { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+.slide-8 .ip-side li { padding: 0.5rem 0.75rem; background: rgba(77,196,255,0.08); border-left: 3px solid var(--accent); border-radius: 6px; font-size: clamp(0.7rem, 1vw, 0.85rem); }
+.slide-8 .scale { background: var(--accent); color: #0a0a0e; padding: clamp(0.7rem, 1.4vw, 1rem); border-radius: 10px; font-size: clamp(0.7rem, 1vw, 0.85rem); line-height: 1.4; }
+.slide-8 .scale b { font-family: var(--font-display); display:block; font-size: clamp(0.95rem, 1.4vw, 1.2rem); margin-bottom: 0.3rem; }
+
+/* 09 MARKET */
+.slide-9 { --accent: var(--accent-coral); }
+.slide-9 .mkt-grid { display: grid; grid-template-columns: 4fr 6fr; gap: var(--content-gap); flex: 1; align-items: center; margin-top: var(--element-gap); }
+.slide-9 .rings { position: relative; width: 100%; max-width: 320px; aspect-ratio: 1; margin: 0 auto; }
+.slide-9 .ring { position: absolute; border-radius: 50%; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 8%; font-family: var(--font-display); }
+.slide-9 .r1 { inset: 0; background: rgba(255,87,34,0.18); color: var(--accent); font-size: clamp(0.95rem, 1.5vw, 1.3rem); }
+.slide-9 .r2 { inset: 18%; background: rgba(255,87,34,0.4); color: white; font-size: clamp(0.95rem, 1.5vw, 1.3rem); }
+.slide-9 .r3 { inset: 38%; background: var(--accent); color: #0a0a0e; font-size: clamp(0.95rem, 1.5vw, 1.3rem); align-items: center; padding-bottom: 0; }
+.slide-9 .ring-labels { display:flex; flex-direction: column; gap: 0.5rem; margin-top: 0.5rem; }
+.slide-9 .rl { background: rgba(255,255,255,0.04); border-radius: 8px; padding: 0.55rem 0.85rem; font-size: clamp(0.7rem, 1vw, 0.85rem); border-left: 3px solid var(--accent); }
+.slide-9 .rl b { font-family: var(--font-display); color: var(--text-primary); }
+.slide-9 .rl span { color: var(--text-secondary); display: block; font-size: 0.85em; margin-top: 0.2rem; }
+.slide-9 .map-box { background: rgba(255,255,255,0.03); border-radius: 12px; padding: clamp(0.6rem, 1.2vw, 1rem); }
+.slide-9 .map-svg { width: 100%; height: auto; max-height: 32vh; }
+.slide-9 .tw-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.5rem; margin-top: 0.6rem; }
+.slide-9 .tw { background: rgba(255,255,255,0.04); border-radius: 8px; padding: 0.55rem 0.75rem; border-top: 3px solid var(--accent); font-size: clamp(0.65rem, 0.95vw, 0.78rem); line-height: 1.4; }
+.slide-9 .tw b { display: block; font-family: var(--font-display); color: var(--text-primary); margin-bottom: 0.2rem; font-size: 0.95em; }
+
+/* 10 ECONOMICS */
+.slide-10 { --accent: var(--accent-gold); }
+.slide-10 .tiers { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: var(--element-gap); margin-top: var(--element-gap); }
+.slide-10 .tier { background: rgba(255,255,255,0.04); border-radius: 12px; padding: clamp(0.85rem, 1.5vw, 1.3rem); display: flex; flex-direction: column; gap: 0.4rem; border-top: 4px solid; }
+.slide-10 .tier-free { border-top-color: var(--text-tertiary); }
+.slide-10 .tier-prem { border-top-color: var(--accent); transform: translateY(-6px); box-shadow: 0 12px 30px rgba(0,0,0,0.3); }
+.slide-10 .tier-corp { border-top-color: var(--accent-coral); transform: translateY(-12px); box-shadow: 0 18px 40px rgba(0,0,0,0.4); }
+.slide-10 .tier h3 { font-family: var(--font-mono); font-size: clamp(0.65rem, 0.95vw, 0.78rem); letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-tertiary); }
+.slide-10 .tier .price { font-family: var(--font-display); color: var(--text-primary); font-size: clamp(1.4rem, 2.6vw, 2.1rem); line-height: 1; letter-spacing: -0.03em; }
+.slide-10 .tier ul { list-style: none; font-size: clamp(0.7rem, 1vw, 0.85rem); color: var(--text-secondary); display: flex; flex-direction: column; gap: 0.25rem; }
+.slide-10 .tier ul li::before { content: "·"; color: var(--accent); font-weight: 700; margin-right: 0.5rem; }
+.slide-10 .ue-row { display: grid; grid-template-columns: 5fr 5fr; gap: var(--content-gap); margin-top: var(--element-gap); }
+.slide-10 .ue-stats { background: var(--accent); color: #0a0a0e; border-radius: 12px; padding: clamp(0.75rem, 1.5vw, 1.25rem); display: grid; grid-template-columns: 1fr 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 0.5rem; }
+.slide-10 .ue-stats div { padding: 0.4rem; border-left: 2px solid #0a0a0e; }
+.slide-10 .ue-stats b { font-family: var(--font-display); font-size: clamp(1rem, 1.7vw, 1.4rem); display: block; line-height: 1; }
+.slide-10 .ue-stats span { font-family: var(--font-mono); font-size: clamp(0.55rem, 0.8vw, 0.65rem); letter-spacing: 0.16em; text-transform: uppercase; opacity: 0.75; }
+.slide-10 .arr { background: rgba(255,255,255,0.04); border-radius: 12px; padding: clamp(0.75rem, 1.5vw, 1.25rem); display:flex; flex-direction:column; }
+.slide-10 .arr svg { width: 100%; height: auto; max-height: 22vh; }
+.slide-10 .legend { display: flex; gap: 1rem; font-family: var(--font-mono); font-size: clamp(0.6rem, 0.9vw, 0.75rem); margin-top: 0.4rem; }
+.slide-10 .legend span:nth-child(1) { color: var(--accent); }
+.slide-10 .legend span:nth-child(2) { color: var(--accent-coral); }
+
+/* 11 TRACTION */
+.slide-11 { --accent: var(--accent-coral); }
+.slide-11 .tr-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--content-gap); flex:1; margin-top: var(--element-gap); }
+.slide-11 h3 { font-family: var(--font-mono); font-size: clamp(0.65rem, 0.95vw, 0.78rem); letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; }
+.slide-11 .pilot-card { background: rgba(255,255,255,0.04); border-left: 3px solid var(--accent); border-radius: 10px; padding: clamp(0.7rem, 1.4vw, 1.1rem); margin-bottom: 0.5rem; }
+.slide-11 .pilot-card .org { font-size: clamp(0.7rem, 1vw, 0.88rem); color: var(--text-secondary); }
+.slide-11 .pilot-card .n { font-family: var(--font-display); font-size: clamp(1.4rem, 2.4vw, 2rem); color: var(--text-primary); line-height: 1; margin-top: 0.3rem; }
+.slide-11 .pilot-card .n span { font-family: var(--font-body); font-size: 0.5em; color: var(--text-tertiary); font-weight: 500; }
+.slide-11 .pilot-total { background: var(--accent); color: #0a0a0e; border-radius: 12px; padding: clamp(0.85rem, 1.6vw, 1.25rem); text-align: center; }
+.slide-11 .pilot-total b { font-family: var(--font-display); font-size: clamp(2.2rem, 4vw, 3rem); display: block; line-height: 1; }
+.slide-11 .pilot-total span { font-size: clamp(0.65rem, 0.95vw, 0.8rem); }
+.slide-11 .advisor { background: rgba(255,255,255,0.04); border-radius: 10px; padding: clamp(0.6rem, 1.2vw, 0.95rem); display: flex; gap: clamp(0.5rem, 1vw, 0.85rem); align-items: center; margin-bottom: 0.4rem; }
+.slide-11 .advisor .avatar { width: clamp(38px, 4vw, 56px); height: clamp(38px, 4vw, 56px); border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent-rose)); color: #0a0a0e; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: clamp(0.7rem, 1.05vw, 0.9rem); flex-shrink: 0; }
+.slide-11 .advisor h4 { font-family: var(--font-thai); font-size: clamp(0.78rem, 1.1vw, 0.95rem); }
+.slide-11 .advisor p { font-size: clamp(0.6rem, 0.9vw, 0.75rem); color: var(--text-secondary); margin-top: 0.15rem; line-height: 1.35; }
+.slide-11 .footer-band { background: rgba(255,255,255,0.04); border-radius: 10px; padding: clamp(0.6rem, 1.2vw, 0.95rem) clamp(0.85rem, 1.6vw, 1.25rem); display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; font-size: clamp(0.65rem, 0.92vw, 0.78rem); margin-top: var(--element-gap); }
+.slide-11 .footer-band b { font-family: var(--font-mono); font-size: 0.85em; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 0.25rem; }
+
+/* 12 ASK */
+.slide-12 { --accent: var(--accent-coral); background: linear-gradient(135deg, #0a0a0e 0%, #2a0a14 50%, #0a0a0e 100%); }
+.slide-12 .ask-wrap { padding: var(--content-gap) clamp(1rem, 4vw, 4rem); display: flex; flex-direction: column; align-items: center; gap: clamp(0.75rem, 2vw, 1.5rem); flex: 1; justify-content: center; max-width: 1100px; margin: 0 auto; }
+.slide-12 .ask-line { width: 200px; height: 4px; background: var(--accent); }
+.slide-12 .ask-h { font-family: var(--font-display); font-size: clamp(2.5rem, 6vw, 4.5rem); letter-spacing: -0.04em; text-align: center; color: var(--text-primary); }
+.slide-12 .ask-h em { color: var(--accent); font-style: normal; }
+.slide-12 .ask-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,87,34,0.25); border-radius: 14px; padding: clamp(1rem, 2.5vw, 1.8rem) clamp(1.25rem, 3vw, 2.4rem); text-align: center; line-height: 1.5; backdrop-filter: blur(8px); }
+.slide-12 .ask-card.primary { font-size: clamp(0.95rem, 1.6vw, 1.4rem); }
+.slide-12 .ask-card.primary b { color: var(--accent); }
+.slide-12 .ask-card.secondary { background: rgba(255,87,34,0.12); border-color: transparent; font-size: clamp(0.85rem, 1.3vw, 1.1rem); }
+.slide-12 .ask-tag { font-style: italic; text-align: center; color: var(--text-secondary); font-size: clamp(0.78rem, 1.1vw, 0.95rem); line-height: 1.5; }
+.slide-12 .ask-tag .th { font-family: var(--font-thai); display: block; margin-top: 0.3rem; }
+.slide-12 .ask-foot { position: absolute; bottom: var(--slide-padding); left: var(--slide-padding); right: var(--slide-padding); display: flex; justify-content: space-between; align-items: center; font-family: var(--font-mono); font-size: var(--small-size); letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-tertiary); }
+.slide-12 .qr { width: 48px; height: 48px; background: linear-gradient(45deg, white 25%, transparent 25%) 0 0/8px 8px, linear-gradient(-45deg, white 25%, transparent 25%) 0 0/8px 8px, linear-gradient(45deg, transparent 75%, white 75%) 0 0/8px 8px, linear-gradient(-45deg, transparent 75%, white 75%) 0 0/8px 8px, #0a0a0e; border-radius: 4px; opacity: 0.7; }
+
+/* === NAV CHROME =================================================== */
+.progress-bar { position: fixed; top: 0; left: 0; height: 3px; background: var(--accent-coral); width: 0%; transition: width 0.3s ease; z-index: 1000; }
+.progress-bar { background: var(--accent, var(--accent-coral)); }
+.nav-dots { position: fixed; right: clamp(0.6rem, 1.5vw, 1.5rem); top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 0.5rem; z-index: 1000; }
+.nav-dots button { width: 9px; height: 9px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.3); background: transparent; cursor: pointer; padding: 0; transition: all 0.25s; }
+.nav-dots button.active { background: var(--accent-coral); border-color: var(--accent-coral); transform: scale(1.4); }
+.keyboard-hint { position: fixed; bottom: 1rem; left: 50%; transform: translateX(-50%); font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-tertiary); letter-spacing: 0.16em; text-transform: uppercase; z-index: 1000; pointer-events: none; opacity: 0.6; }
+
+/* Print */
+@media print {
+  @page { size: A4 landscape; margin: 0; }
+  html, body { background: white; height: auto; overflow: visible; }
+  .nav-dots, .keyboard-hint, .progress-bar { display: none !important; }
+  .slide { height: 100vh; page-break-after: always; }
+}
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progress"></div>
+<nav class="nav-dots" id="navDots" aria-label="Slide navigation"></nav>
+<div class="keyboard-hint">← / → · scroll · 1–9 jump</div>
+
+<!-- ============================ 01 COVER ============================ -->
+<section class="slide slide-1" data-num="01">
+  <div class="s-num reveal">01<em>.</em></div>
+  <div class="s-nav reveal">KOTOKA · GENESIS <b>2026</b></div>
+  <div class="slide-content cover-grid">
+    <div>
+      <div class="wordmark reveal">KO<em>TO</em>KA</div>
+      <div class="tag-prop reveal">Sensory Tag Engine · δS<sub>KOTOKA</sub> = 0</div>
+      <p class="tag-line reveal">Sensory-anchored vocabulary AI for the 8.4&nbsp;million working adults of Southeast Asia. Every word captured where you live, tagged with what you felt, reviewed when you return.</p>
+    </div>
+    <div class="reveal-scale">
+      <div class="pilots-card"><b>2,800</b><span>Pilot users · กศน + Samsenwit</span></div>
+    </div>
+  </div>
+  <div class="trust-strip reveal">
+    <span><b>Chulalongkorn</b> · Pixelmath · Google Cloud for Startups</span>
+    <span>Marina Bay Sands · June 10–11, 2026</span>
+  </div>
+</section>
+
+<!-- ============================ 02 PROBLEM ========================== -->
+<section class="slide slide-2" data-num="02">
+  <div class="s-num reveal">02<em>.</em></div>
+  <div class="s-nav reveal">PROBLEM · <b>Activation Failure</b></div>
+  <div class="slide-content">
+    <h1 class="display reveal">The Activation Failure — <em>$4.2B/yr</em> lost in SEA workforce</h1>
+    <div class="grid-55 reveal" style="margin-top: var(--content-gap);">
+      <div class="ebbing">
+        <h2 class="eyebrow">Ebbinghaus' Forgetting Curve</h2>
+        <svg viewBox="0 0 600 320" preserveAspectRatio="xMidYMid meet">
+          <line x1="60" y1="280" x2="560" y2="280" stroke="#5a5a63" stroke-width="1"/>
+          <line x1="60" y1="40" x2="60" y2="280" stroke="#5a5a63" stroke-width="1"/>
+          <text x="20" y="46" fill="#9a9aa3" font-size="13" font-family="JetBrains Mono">100%</text>
+          <text x="32" y="140" fill="#9a9aa3" font-size="13" font-family="JetBrains Mono">60%</text>
+          <text x="32" y="200" fill="#9a9aa3" font-size="13" font-family="JetBrains Mono">45%</text>
+          <text x="32" y="240" fill="#9a9aa3" font-size="13" font-family="JetBrains Mono">35%</text>
+          <text x="56" y="300" fill="#9a9aa3" font-size="11" font-family="JetBrains Mono">0min</text>
+          <text x="180" y="300" fill="#9a9aa3" font-size="11" font-family="JetBrains Mono">20min</text>
+          <text x="320" y="300" fill="#9a9aa3" font-size="11" font-family="JetBrains Mono">1h</text>
+          <text x="500" y="300" fill="#9a9aa3" font-size="11" font-family="JetBrains Mono">24h</text>
+          <path d="M60 46 C 130 46, 180 124, 220 140 S 340 195, 380 200 S 530 240, 560 240 L 560 280 L 60 280 Z" fill="rgba(255,77,121,0.18)"/>
+          <path d="M60 46 C 130 46, 180 124, 220 140 S 340 195, 380 200 S 530 240, 560 240" stroke="#FF4D79" stroke-width="4" fill="none" stroke-linecap="round"/>
+          <circle cx="60" cy="46" r="6" fill="#FF4D79"/>
+          <circle cx="220" cy="140" r="6" fill="#FF4D79"/>
+          <circle cx="380" cy="200" r="6" fill="#FF4D79"/>
+          <circle cx="560" cy="240" r="6" fill="#FF4D79"/>
+        </svg>
+        <p style="font-family:var(--font-mono); font-size: clamp(0.55rem,0.8vw,0.7rem); color: var(--text-tertiary);">Murre &amp; Dros 2015 · PLoS One · DOI:10.1371/journal.pone.0120644</p>
+      </div>
+      <div style="display:flex; flex-direction:column; gap: 0.5rem;">
+        <div class="card-dark accented"><div class="v">8.4M</div><div class="l">Thai working adults — 12+ yrs of English education — still cannot recall vocab at work.</div></div>
+        <div class="card-dark accented"><div class="v">86.7%</div><div class="l">Activation Failure rate (Kotoka survey, Bangkok, n=300, 2026).</div></div>
+        <div class="card-dark accented"><div class="v">฿14k–฿28k</div><div class="l">salary premium forfeited per year per CEFR level locked.</div></div>
+      </div>
+    </div>
+    <div class="root-row reveal">
+      <div class="rc"><span class="n">01</span><span class="t">No Personal Anchor — Paivio 1991</span></div>
+      <div class="rc"><span class="n">02</span><span class="t">Context Mismatch — Godden &amp; Baddeley 1975</span></div>
+      <div class="rc"><span class="n">03</span><span class="t">No Sensory Binding — 6 channels missed</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 03 INSIGHT ========================== -->
+<section class="slide slide-3" data-num="03">
+  <div class="s-num reveal">03<em>.</em></div>
+  <div class="s-nav reveal">INSIGHT · <b>The non-obvious bet</b></div>
+  <div class="slide-content grid-64" style="align-items: center;">
+    <div>
+      <h2 class="eyebrow reveal">The Insight</h2>
+      <h1 class="insight-h reveal">Repetition cannot fix what <em>context</em> broke.</h1>
+      <p class="insight-body reveal">Duolingo, Babbel, ELSA optimize <b style="color:white">repetition</b>. Repetition strengthens encoding only when retrieval context matches encoding context (Godden &amp; Baddeley, 1975). Classroom-encoded vocab fails at the office. Kotoka binds every word to the user's own scene, location, mood, sound, time-of-day, weather — and re-fires the review the moment they walk back in.</p>
+      <div class="insight-pull reveal">Context-Dependent Memory, deployed as product.</div>
+    </div>
+    <div class="channels reveal-scale">
+      <div class="ch"><svg viewBox="0 0 24 24"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><span>Vision</span></div>
+      <div class="ch"><svg viewBox="0 0 24 24"><path d="M3 12c0-5 4-9 9-9s9 4 9 9-4 9-9 9c-2 0-3-1-3-3v-3"/></svg><span>Audio</span></div>
+      <div class="ch"><svg viewBox="0 0 24 24"><path d="M12 3v9M9 9c0-1 1-2 3-2s3 1 3 2c0 4-3 5-3 8 0 1-1 2-2 2s-2-1-2-2c0-3-3-4-3-8 0-3 2-6 4-6"/></svg><span>Smell</span></div>
+      <div class="ch"><svg viewBox="0 0 24 24"><path d="M7 10c0-3 2-5 5-5s5 2 5 5v6c0 2-1 3-3 3h-4c-2 0-3-1-3-3z"/><path d="M9 14h6"/></svg><span>Taste</span></div>
+      <div class="ch"><svg viewBox="0 0 24 24"><path d="M7 11V6a2 2 0 014 0v5M11 8V4a2 2 0 014 0v8M15 9V7a2 2 0 014 0v8a6 6 0 01-12 0v-3"/></svg><span>Touch</span></div>
+      <div class="ch"><svg viewBox="0 0 24 24"><path d="M12 22s7-7 7-13a7 7 0 10-14 0c0 6 7 13 7 13z"/><circle cx="12" cy="9" r="3"/></svg><span>Geo</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 04 SOLUTION ========================= -->
+<section class="slide slide-4" data-num="04">
+  <div class="s-num reveal">04<em>.</em></div>
+  <div class="s-nav reveal">SOLUTION · <b>Sensory Tag Engine + δS<sub>KOTOKA</sub></b></div>
+  <div class="slide-content">
+    <h1 class="display reveal">Two named components. <em>One closed loop.</em></h1>
+    <div class="arch-flow reveal">
+      <div class="node n1">Snap / Type / GPS<sub>camera · keyboard · pin</sub></div>
+      <span class="arr">▶</span>
+      <div class="node n2">Gemini 2.5 Vision<sub>1.8s P50 · 2.4s P95</sub></div>
+      <span class="arr">▶</span>
+      <div class="node n3">6-Channel Sensory Tag Engine
+        <div class="channels-row"><span>vision</span><span>audio</span><span>smell</span><span>taste</span><span>touch</span><span>geo</span></div>
+      </div>
+      <span class="arr">▶</span>
+      <div class="node n4">δS<sub>KOTOKA</sub> = 0<sub>Variational scheduler</sub></div>
+      <span class="arr">▼</span>
+      <div class="node n5">FCM Geohash Re-fire<sub>150m radius · context-matched</sub></div>
+    </div>
+    <div class="eq-bench reveal">
+      <div class="bench"><b>+40% recall</b><p>vs SM-2 (Anki) baseline in context-matched retrieval. Kotoka internal pilot, n=120, p&lt;0.01.</p></div>
+      <div class="eqbox">δS<sub>KOTOKA</sub> = ∂L/∂wᵢ − d/dt (∂L/∂ẇᵢ) = 0</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 05 PRODUCT ========================== -->
+<section class="slide slide-5" data-num="05">
+  <div class="s-num reveal">05<em>.</em></div>
+  <div class="s-nav reveal">PRODUCT · <b>4 Capture Modes</b></div>
+  <div class="slide-content">
+    <h1 class="display reveal">Four capture modes <em>×</em> one scheduler</h1>
+    <div class="phones reveal">
+      <div class="pcell">
+        <div class="pframe"><div class="pscreen ps-snap"><div>Point at any object — learn its vocabulary</div></div></div>
+        <div class="ptile"><b>Snap &amp; Learn</b><span>12 words / photo</span></div>
+      </div>
+      <div class="pcell">
+        <div class="pframe"><div class="pscreen ps-audio">
+          <div style="font-size:0.6em; opacity:0.6;">Auditory Capture</div>
+          <div class="waveform"><i style="height:18%"></i><i style="height:42%"></i><i style="height:65%"></i><i style="height:30%"></i><i style="height:78%"></i><i style="height:48%"></i><i style="height:22%"></i><i style="height:62%"></i><i style="height:38%"></i><i style="height:70%"></i><i style="height:28%"></i><i style="height:50%"></i><i style="height:18%"></i></div>
+          <div class="timer">11.3s</div>
+          <div style="font-size:0.55em; opacity:0.5;">● recording</div>
+        </div></div>
+        <div class="ptile"><b>Listen &amp; Revive</b><span>2.1s STT · Chirp 3</span></div>
+      </div>
+      <div class="pcell">
+        <div class="pframe"><div class="pscreen ps-tag">
+          <div class="label" style="font-size:0.7em;">What does it smell like?</div>
+          <div><span class="chip">Roasted</span><span class="chip">Earthy</span><span class="chip">Smoky</span><span class="chip">Fresh</span></div>
+          <div class="label" style="font-size:0.7em; margin-top:0.4em;">What does it taste like?</div>
+          <div><span class="chip">Bitter</span><span class="chip">Sweet</span><span class="chip">Spicy</span><span class="chip">Umami</span></div>
+          <div class="save-cta">✓ Save Sensory Memory</div>
+        </div></div>
+        <div class="ptile"><b>Tag Your Senses</b><span>6 channels</span></div>
+      </div>
+      <div class="pcell">
+        <div class="pframe"><div class="pscreen ps-word">
+          <div style="font-size:0.6em; color:#777;">Noun · Café / Morning</div>
+          <div class="word-h">Flower</div>
+          <div class="word-pron">/ˈflaʊ.ər/</div>
+          <div class="word-th">ดอกไม้</div>
+          <div class="cluster">
+            <div><span><b>Brew</b> · v</span><span>—</span></div>
+            <div><span><b>Aroma</b> · n</span><span>—</span></div>
+            <div><span><b>Bitter</b> · adj</span><span>—</span></div>
+            <div><span><b>Espresso</b> · n</span><span>—</span></div>
+          </div>
+        </div></div>
+        <div class="ptile"><b>Map Your Memory</b><span>34 pins</span></div>
+      </div>
+    </div>
+    <div class="latency-strip reveal">
+      <span>Image → vocab · 1.8s P50</span>
+      <span>Audio → vocab · 2.1s P50</span>
+      <span>Re-schedule · 180ms</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 06 MEMORY MAP ======================= -->
+<section class="slide slide-6" data-num="06">
+  <div class="s-num reveal">06<em>.</em></div>
+  <div class="s-nav reveal">MEMORY MAP · <b>The wow moment</b></div>
+  <div class="slide-content mm-grid">
+    <div class="reveal-scale">
+      <div class="mm-phone">
+        <div class="mm-screen">
+          <div class="mm-districts"><span>CHATUCHAK</span><span>SUKHUMVIT</span><span>SILOM</span><span>OLD TOWN</span></div>
+          <div class="mm-canvas">
+            <div class="dot" style="top:18%;left:28%;"></div>
+            <div class="dot" style="top:35%;left:55%;"></div>
+            <div class="dot" style="top:52%;left:23%;"></div>
+            <div class="dot" style="top:64%;left:62%;"></div>
+            <div class="dot" style="top:80%;left:42%;"></div>
+          </div>
+          <div class="vp"><b>ประชุม</b> meeting · Office Asok · 8:54</div>
+          <div class="vp"><b>กาแฟ</b> coffee · Café Ari · 10:30</div>
+          <div class="vp"><b>รถไฟฟ้า</b> sky train · BTS Siam · 12:15</div>
+          <div class="vp"><b>ตลาด</b> market · Chatuchak · 14:40</div>
+          <div class="mm-stats"><span><b>34</b> words</span><span><b>12</b> locations</span><span style="color:#ff8a00;">🔥 18 day streak</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="story">
+      <h1 class="display reveal" style="font-size: clamp(1.6rem, 3.5vw, 2.6rem);">Geohash + FCM = <em>location-triggered recall</em></h1>
+      <div class="step reveal"><div class="n">1</div><div><h4>Capture at the scene</h4><p>User snaps "deadline" at office desk. Location hashed: <code>w3gv2kp</code> (150m radius).</p></div></div>
+      <div class="step reveal"><div class="n">2</div><div><h4>Schedule via δS<sub>KOTOKA</sub></h4><p>Variational scheduler queues review at t+24h, weighted by retention, context, energy, goal.</p></div></div>
+      <div class="step reveal"><div class="n">3</div><div><h4>Re-fire on revisit</h4><p>Day 2 — user re-enters Asok 150m bucket. FCM fires a 30-sec micro-review at the moment retrieval is easiest.</p></div></div>
+      <div class="hero-stat reveal"><b>12.4×</b><span>retention vs control · n=120 · Godden &amp; Baddeley 1975 deployed at consumer scale</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 07 COMPETITIVE ====================== -->
+<section class="slide slide-7" data-num="07">
+  <div class="s-num reveal">07<em>.</em></div>
+  <div class="s-nav reveal">COMPETITIVE · <b>vs Duolingo · Babbel · Anki · ELSA</b></div>
+  <div class="slide-content">
+    <h1 class="display reveal">Why no incumbent reaches <em>Activation Failure.</em></h1>
+    <table class="reveal" aria-describedby="competitive-foot">
+      <thead><tr>
+        <th scope="col"><span style="position:absolute;clip:rect(0,0,0,0);">Capability</span></th>
+        <th scope="col" class="kotoka">KOTOKA</th>
+        <th scope="col">Duolingo</th>
+        <th scope="col">Babbel</th>
+        <th scope="col">Anki</th>
+        <th scope="col">ELSA Speak</th>
+      </tr></thead>
+      <tbody>
+        <tr><td class="dim">Personal Content sourcing</td><td class="kotoka"><span class="check">✓</span> Snap</td><td><span class="x">✗</span></td><td><span class="x">✗</span></td><td><span class="x">✗ manual</span></td><td><span class="x">✗</span></td></tr>
+        <tr><td class="dim">6-channel Sensory Tag</td><td class="kotoka"><span class="check">✓</span></td><td><span class="x">✗</span></td><td><span class="x">✗</span></td><td><span class="x">✗</span></td><td><span class="x">✗</span></td></tr>
+        <tr><td class="dim">Geohash Re-fire (150m)</td><td class="kotoka"><span class="check">✓</span></td><td><span class="x">✗</span></td><td><span class="x">✗</span></td><td><span class="x">✗</span></td><td><span class="x">✗</span></td></tr>
+        <tr><td class="dim">SRS Algorithm</td><td class="kotoka">δS<sub>KOTOKA</sub></td><td>Superscalar</td><td>SM-2 based</td><td>SM-2</td><td>pronunciation</td></tr>
+        <tr><td class="dim">Recall benchmark</td><td class="kotoka">+40%* vs SM-2</td><td>baseline</td><td>baseline</td><td>baseline</td><td>—</td></tr>
+        <tr><td class="dim">Price ฿/mo</td><td class="kotoka">99</td><td>89–150</td><td>140–210</td><td>free–200</td><td>250–400</td></tr>
+      </tbody>
+    </table>
+    <p class="footnote" id="competitive-foot">* Internal pilot, n=120, p&lt;0.01, vs SM-2 in context-matched retrieval.</p>
+    <div class="moat reveal"><strong>Moat</strong>Sensory Tag corpus = 2.8M (word, geohash, mood) tuples. Competitors need 6+ months of revisit data per user to replicate. Each new Kotoka user enriches the corpus → data flywheel.</div>
+  </div>
+</section>
+
+<!-- ============================ 08 ARCHITECTURE ===================== -->
+<section class="slide slide-8" data-num="08">
+  <div class="s-num reveal">08<em>.</em></div>
+  <div class="s-nav reveal">ARCHITECTURE · <b>Built on Google Cloud</b></div>
+  <div class="slide-content">
+    <h1 class="display reveal">Production stack — Google Cloud for Startups <em>partner</em></h1>
+    <div class="arch-grid reveal">
+      <div class="layers">
+        <div class="layer l1"><h4>Client · React Native + Expo</h4>
+          <div class="pills"><span>Snap | Type | GPS</span><span>Zustand state</span><span>SQLCipher local</span><span>Expo Camera + MobileNetV3</span></div>
+        </div>
+        <div class="arr-down">▼ HTTPS · Firebase ID token · 15-min</div>
+        <div class="layer l2"><h4>Cloud Run API · Node / Fastify</h4>
+          <div class="pills"><span>/analyze-image</span><span>/generate-sentence</span><span>/koko-reply</span><span>/srs-schedule</span><span>/tts</span><span>/verify-receipt</span></div>
+        </div>
+        <div class="arr-down">▼</div>
+        <div class="layer l3"><h4>Google Cloud Services</h4>
+          <div class="pills"><span>Gemini 2.5 Flash · 1.8s P50</span><span>Cloud Firestore · offline-first</span><span>Cloud STT Chirp 3 · ZH/VI tones</span><span>FCM Geohash Push · 150m</span></div>
+        </div>
+      </div>
+      <div class="ip-side">
+        <h4>Proprietary IP</h4>
+        <ul>
+          <li>Sensory Tag Engine · 6-channel encoder</li>
+          <li>δS<sub>KOTOKA</sub> = 0 · Variational Action scheduler</li>
+          <li>Geohash re-fire trigger · 150m radius</li>
+        </ul>
+        <div class="scale"><b>10× SCALE</b>Cloud Run autoscale 1→200 instances · FCM 100M msg/day · sub-200ms reschedule under load · MobileNetV3 fallback when Gemini RPM saturates.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 09 MARKET =========================== -->
+<section class="slide slide-9" data-num="09">
+  <div class="s-num reveal">09<em>.</em></div>
+  <div class="s-nav reveal">MARKET · <b>Thailand beachhead → ASEAN</b></div>
+  <div class="slide-content">
+    <h1 class="display reveal">$4.2B SEA workforce English market — Thailand is <em>the wedge</em></h1>
+    <div class="mkt-grid reveal">
+      <div>
+        <div class="rings">
+          <div class="ring r1">$4.2B</div>
+          <div class="ring r2">$620M</div>
+          <div class="ring r3">$40M</div>
+        </div>
+        <div class="ring-labels">
+          <div class="rl"><b>TAM $4.2B</b><span>50M SEA working adults × $84/yr · HolonIQ 2025; Anuntasin 2025 (TH ฿15.2B)</span></div>
+          <div class="rl"><b>SAM $620M</b><span>17M SEA online learners × $36 ARPU/yr · Statista 2025</span></div>
+          <div class="rl"><b>SOM $40M Y3</b><span>17k Premium ฿1,188/yr + 5k corp seats ฿7,188/yr · 6 markets</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="map-box">
+          <svg class="map-svg" viewBox="0 0 600 280" preserveAspectRatio="xMidYMid meet">
+            <rect x="8" y="8" width="584" height="264" rx="12" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)"/>
+            <path d="M180 70 L240 70 L260 120 L240 195 L200 220 L180 210 L170 160 L165 110 Z" fill="#FF5722"/>
+            <text x="200" y="150" font-size="14" font-weight="900" fill="white" font-family="Archivo Black">TH · Y1</text>
+            <text x="200" y="170" font-size="10" fill="white" font-family="Space Grotesk">2,800 pilots</text>
+            <circle cx="240" cy="240" r="9" fill="#ff8a4d"/>
+            <text x="252" y="244" font-size="10" fill="#ff8a4d" font-family="Space Grotesk">SG · Y2</text>
+            <path d="M210 215 L260 215 L270 250 L220 260 L195 240 Z" fill="#ff8a4d"/>
+            <text x="225" y="240" font-size="10" font-family="Space Grotesk" fill="#0a0a0e">MY</text>
+            <path d="M290 60 L320 70 L335 130 L325 195 L310 215 L295 195 L300 140 Z" fill="rgba(255,87,34,0.35)"/>
+            <text x="298" y="150" font-size="11" fill="#ff8a4d" font-family="Space Grotesk">VN · Y3</text>
+            <path d="M250 280 L500 270 L520 305 L260 320 Z" fill="rgba(255,87,34,0.35)"/>
+            <text x="380" y="298" font-size="11" fill="#ff8a4d" font-family="Space Grotesk">ID · Y3 · 12k</text>
+            <path d="M460 130 L490 120 L500 200 L470 230 L455 180 Z" fill="rgba(255,87,34,0.35)"/>
+            <text x="465" y="170" font-size="11" fill="#ff8a4d" font-family="Space Grotesk">PH</text>
+          </svg>
+        </div>
+        <div class="tw-grid">
+          <div class="tw"><b>Thailand 4.0</b>Digital workforce mandate (2026 budget)</div>
+          <div class="tw"><b>ASEAN MRA</b>English B1+ required for Mutual Recognition</div>
+          <div class="tw"><b>PromptPay</b>90M accounts · frictionless ฿99/mo</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 10 ECONOMICS ======================== -->
+<section class="slide slide-10" data-num="10">
+  <div class="s-num reveal">10<em>.</em></div>
+  <div class="s-nav reveal">UNIT ECONOMICS · <b>Freemium → Premium → Corporate</b></div>
+  <div class="slide-content">
+    <h1 class="display reveal">Y3 LTV/CAC <em>11.0×</em> — fund-returner threshold</h1>
+    <div class="tiers reveal">
+      <div class="tier tier-free"><h3>Free</h3><div class="price">฿0</div><ul><li>10 Snaps / day</li><li>view Memory Map</li><li>1 language</li><li>community access</li></ul></div>
+      <div class="tier tier-prem"><h3>Premium</h3><div class="price">฿99/mo</div><ul><li>Unlimited Snap</li><li>Memory Map edit</li><li>6 languages directional</li><li>streak rewards · KotoCoin</li></ul></div>
+      <div class="tier tier-corp"><h3>Corporate</h3><div class="price">฿599/seat/mo</div><ul><li>Admin dashboard</li><li>custom vocab packs</li><li>team challenges</li><li>progress reports · CEFR</li></ul></div>
+    </div>
+    <div class="ue-row reveal">
+      <div class="ue-stats">
+        <div><b>฿99/mo</b><span>ARPU</span></div>
+        <div><b>฿1,384</b><span>LTV</span></div>
+        <div><b>฿500</b><span>CAC</span></div>
+        <div><b>2.77×</b><span>LTV/CAC Y1</span></div>
+        <div><b>5.1 mo</b><span>Payback</span></div>
+        <div><b>88%</b><span>Gross margin</span></div>
+      </div>
+      <div class="arr">
+        <h2 class="eyebrow">ARR Trajectory · ฿M</h2>
+        <svg viewBox="0 0 480 200" preserveAspectRatio="xMidYMid meet">
+          <line x1="40" y1="170" x2="460" y2="170" stroke="#5a5a63"/>
+          <line x1="40" y1="20" x2="40" y2="170" stroke="#5a5a63"/>
+          <text x="20" y="30" fill="#9a9aa3" font-size="11" font-family="JetBrains Mono">฿18M</text>
+          <text x="20" y="100" fill="#9a9aa3" font-size="11" font-family="JetBrains Mono">฿9M</text>
+          <text x="20" y="174" fill="#9a9aa3" font-size="11" font-family="JetBrains Mono">฿0</text>
+          <text x="80" y="190" fill="#9a9aa3" font-size="11" font-family="JetBrains Mono">Y1</text>
+          <text x="240" y="190" fill="#9a9aa3" font-size="11" font-family="JetBrains Mono">Y2</text>
+          <text x="400" y="190" fill="#9a9aa3" font-size="11" font-family="JetBrains Mono">Y3</text>
+          <path d="M40 168 L110 162 L260 130 L420 70 L420 170 L40 170 Z" fill="rgba(255,200,87,0.45)"/>
+          <path d="M40 168 L110 162 L260 115 L420 30 L420 70 L260 130 L110 162 Z" fill="rgba(255,87,34,0.55)"/>
+          <path d="M40 168 L110 162 L260 115 L420 30" stroke="#FFC857" stroke-width="3" fill="none"/>
+          <circle cx="110" cy="162" r="4" fill="#FFC857"/>
+          <circle cx="260" cy="115" r="4" fill="#FFC857"/>
+          <circle cx="420" cy="30" r="5" fill="#FFC857"/>
+          <text x="120" y="156" font-size="11" font-weight="900" fill="white" font-family="Archivo Black">฿1.2M</text>
+          <text x="270" y="108" font-size="11" font-weight="900" fill="white" font-family="Archivo Black">฿5.9M</text>
+          <text x="370" y="22" font-size="13" font-weight="900" fill="white" font-family="Archivo Black">฿17.8M</text>
+        </svg>
+        <div class="legend"><span>● B2C</span><span>● B2B (Y2+)</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 11 TRACTION ========================= -->
+<section class="slide slide-11" data-num="11">
+  <div class="s-num reveal">11<em>.</em></div>
+  <div class="s-nav reveal">TRACTION · <b>Pilots + Chula PhD</b></div>
+  <div class="slide-content">
+    <h1 class="display reveal">2,800 verified pilots — and a <em>Chulalongkorn</em> academic anchor</h1>
+    <div class="tr-grid reveal">
+      <div>
+        <h3>Institutional Pilots</h3>
+        <div class="pilot-card">
+          <div class="org">กศน · Office of Non-Formal Education Thailand</div>
+          <div class="n">1,000 <span>active pilot learners</span></div>
+        </div>
+        <div class="pilot-card">
+          <div class="org">Samsenwit School · Bangkok</div>
+          <div class="n">1,800 <span>student pilot deployment</span></div>
+        </div>
+        <div class="pilot-total"><b>2,800</b><span>verified pilot users · Q1 2026</span></div>
+      </div>
+      <div>
+        <h3>Advisors</h3>
+        <div class="advisor"><div class="avatar">กบ</div><div><h4>ดร.กอบชัย ดวงรัตนเลิศ</h4><p>Project Lead</p></div></div>
+        <div class="advisor"><div class="avatar">นพ</div><div><h4>ดร.นพรัตน์ ศรีเจริญ</h4><p>Chulalongkorn University · Faculty of Education · Special Education &amp; Inclusive Learning · Academic Advisor</p></div></div>
+        <div class="advisor"><div class="avatar">ทภ</div><div><h4>นายทินภัทร สิทธิสุวรรณ</h4><p>Innovation Advisor</p></div></div>
+        <div class="advisor"><div class="avatar">SG</div><div><h4>Shikhar Gairola</h4><p>Tech &amp; Innovation Lead · Pixelmath co-founder</p></div></div>
+      </div>
+    </div>
+    <div class="footer-band reveal">
+      <div><b>Partners</b>Google Cloud for Startups · Pixelmath · Chulalongkorn Faculty of Education</div>
+      <div><b>Growth signals</b>138K IG @artificialintelligencefacts (zero-CAC) · NPS 47 vs Duolingo 41</div>
+      <div><b>External roadmap</b>ACL preprint Q3 2026 · Chula replication · NVIDIA Inception</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 12 ASK ============================== -->
+<section class="slide slide-12" data-num="12">
+  <div class="s-num reveal">12<em>.</em></div>
+  <div class="s-nav reveal">THE ASK · <b>$100K OpenAI credits</b></div>
+  <div class="ask-wrap">
+    <div class="ask-line reveal"></div>
+    <h1 class="ask-h reveal">THE <em>ASK</em></h1>
+    <div class="ask-card primary reveal">
+      <b>$100K OpenAI credits</b> scale Sensory Tag Engine inference from
+      <b>2,800 → 100,000</b> daily active learners while holding latency P95 &lt; 2.4s —
+      unlocking our first 3 enterprise contracts (CP All, PTT, SCB) in <b>Q3 2026</b>.
+    </div>
+    <div class="ask-card secondary reveal">
+      Within 18 months, Kotoka becomes the default workforce upskilling layer for ASEAN's <strong>50M-person</strong> professional workforce.
+    </div>
+    <div class="ask-tag reveal">
+      "The world has been speaking to you all along.<br/>Kotoka simply helps you hear it."
+      <span class="th">"โลกพูดกับคุณมาตลอด · Kotoka แค่ช่วยให้คุณได้ยินมัน"</span>
+    </div>
+  </div>
+  <div class="ask-foot">
+    <span>contact@mykotoka.com  ·  kotoka.app</span>
+    <div class="qr" title="kotoka.app"></div>
+    <span>Genesis 2026 · Marina Bay Sands</span>
+  </div>
+</section>
+
+<script>
+/* =====================================================================
+   KOTOKA SLIDE PRESENTATION CONTROLLER
+   ===================================================================== */
+class SlidePresentation {
+  constructor() {
+    this.slides = Array.from(document.querySelectorAll('.slide'));
+    this.total = this.slides.length;
+    this.current = 0;
+    this.navDotsContainer = document.getElementById('navDots');
+    this.progress = document.getElementById('progress');
+    this.setupNavDots();
+    this.setupIntersectionObserver();
+    this.setupKeyboard();
+    this.setupTouch();
+    this.update();
+    // hash deeplink
+    const h = parseInt((location.hash || '').slice(1), 10);
+    if (h && h >= 1 && h <= this.total) this.goto(h - 1);
+  }
+
+  setupNavDots() {
+    // CRITICAL: clear before building (per skill html-template.md guidance)
+    this.navDotsContainer.innerHTML = '';
+    this.slides.forEach((s, i) => {
+      const b = document.createElement('button');
+      b.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+      b.addEventListener('click', () => this.goto(i));
+      this.navDotsContainer.appendChild(b);
+    });
+  }
+
+  setupIntersectionObserver() {
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          this.current = this.slides.indexOf(e.target);
+          this.update();
+        }
+      });
+    }, { threshold: 0.5 });
+    this.slides.forEach(s => io.observe(s));
+  }
+
+  setupKeyboard() {
+    window.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); this.goto(this.current + 1); }
+      else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); this.goto(this.current - 1); }
+      else if (e.key === 'Home') this.goto(0);
+      else if (e.key === 'End') this.goto(this.total - 1);
+      else if (e.key === 'f' || e.key === 'F') {
+        if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+        else document.exitFullscreen();
+      }
+      else if (/^[1-9]$/.test(e.key)) this.goto(parseInt(e.key, 10) - 1);
+    });
+  }
+
+  setupTouch() {
+    let startY = 0;
+    window.addEventListener('touchstart', e => { startY = e.touches[0].clientY; }, { passive: true });
+    window.addEventListener('touchend', e => {
+      const dy = e.changedTouches[0].clientY - startY;
+      if (Math.abs(dy) > 60) this.goto(this.current + (dy < 0 ? 1 : -1));
+    }, { passive: true });
+  }
+
+  goto(i) {
+    i = Math.max(0, Math.min(this.total - 1, i));
+    this.slides[i].scrollIntoView({ behavior: 'smooth' });
+    this.current = i;
+    location.hash = '#' + (i + 1);
+    this.update();
+  }
+
+  update() {
+    Array.from(this.navDotsContainer.children).forEach((d, i) => {
+      d.classList.toggle('active', i === this.current);
+    });
+    this.progress.style.width = (((this.current + 1) / this.total) * 100) + '%';
+  }
+}
+
+new SlidePresentation();
+</script>
+</body>
+</html>
